@@ -1,0 +1,98 @@
+﻿<link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/font-awesome/4.3.0/css/font-awesome.min.css">
+
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<div class="row">
+<div class="col-md-3 text-center">
+  <hr>
+  <h3>Cut This Video</h3>
+  <div class="panel panel-info" style="margin-top:30px;">
+    <div class="panel-heading">
+      <h3 class="panel-title">Current Time</h3>
+    </div>
+    <div class="panel-body">
+      <div id="curTime" style="font-size:20px;">
+      </div>
+    </div>
+  </div>
+
+  <div class="panel panel-info">
+    <div class="panel-heading">
+      <h3 class="panel-title">Cutted duration</h3>
+    </div>
+    <div class="panel-body">
+      <div id="finalDuration" style="font-size:20px;">
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<!-- player -->
+<div class="col-md-6 text-center" style="padding-top:30px;">
+
+  <div class="embed-responsive embed-responsive-16by9">
+    <!-- 1. The <iframe> (and video player) will replace this <div> tag. -->
+    <div id="player" class="embed-responsive-item">
+    </div>
+  </div>
+
+  <!-- progress bar -->
+  <div class="progress">
+    <div class="progress-bar progress-bar-primary progress-bar-striped" id="cut-left" style="width: 0%">
+      <span class="sr-only"></span>
+    </div>
+    <div class="progress-bar progress-bar-success progress-bar-striped active" id="played" style="width: 0%">
+      <span class="sr-only"></span>
+    </div>
+    <div class="progress-bar progress-bar-warning progress-bar-striped" id="toPlay" style="width: 100%">
+      <span class="sr-only"></span>
+    </div>
+    <div class="progress-bar progress-bar-primary progress-bar-striped" id="cut-right" style="width: 0%">
+      <span class="sr-only"></span>
+    </div>
+  </div>
+
+  <!-- 2. The IONrangeSlider container -->
+  <div id="range"></div>
+  <div id="value-input"></div>
+  <div id="value-span"></div>
+
+
+  <!-- Controls -->
+  <div id="controls" style="padding-top:20px;">
+    <a href="#" onClick="rewindVideo()" class="separa">
+      <i class="separa fa fa-refresh fa-2x"></i>
+    </a>
+
+    <a href="#" onClick="backwardVideo()" class="separa">
+      <i class="separa fa fa-backward fa-2x"></i>
+    </a>
+    <a href="#" onClick="playPauseVideo()" id="playPause" class="separa">
+      <i class="separa fa fa-play fa-2x"></i>
+    </a>
+    <a href="#" onClick="forwardVideo()" class="separa">
+      <i class="separa fa fa-forward fa-2x"></i>
+    </a>
+  </div>
+
+      <div class="input-group" style="margin-top:30px;">
+        <span class="input-group-addon" id="basic-addon1">Title</span>
+        <input type="text" name="title" id="title" class="form-control" value="Bill Maher Live DNC Special Edition: July 27" aria-describedby="basic-addon1" required>
+        <div id="inputList"></div>
+      </div>
+      <div class="col-md-3">
+      </div>
+      <div class="col-md-6 text-center" style="padding-top: 30px;">
+        <button type="submit" class="btn btn-primary" style="margin-top:10px">Cut</button>
+      </div>
+      <div class="col-md-3">
+      </div>
+</div>
+</div> <!-- endRow -->
+
+@section Scripts {
+    @{
+        <script src="~/js/nouislider.js"></script>
+       <script src="~/js/video.js"></script>
+    }
+}

@@ -1,0 +1,157 @@
+﻿<style>
+    .lis-group-item {
+        display: inline-block;
+        font-family: 'Apercu Mono';
+        font-weight: 700;
+        padding: 5px;
+        margin-right: 15px;
+        margin-bottom: 15px;
+    }
+
+        .lis-group-item.selected {
+            border-bottom: 2px solid blue;
+        }
+
+    .draggable-container--is-dragging {
+        user-select: none;
+    }
+
+    .draggable-source--placed {
+        background-color: bisque;
+    }
+
+    .draggable-source--is-dragging {
+        background-color: white;
+    }
+
+    .lis-group {
+        display: flex;
+        flex-wrap: wrap;
+    }
+
+    .droptarget-div {
+        float: left;
+        width: 100px;
+        height: 55px;
+        margin: 25px 25px 5px 5px;
+        padding: 10px;
+        border: 1px solid black;
+    }
+
+    #dragtarget-div {
+        background: #eee;
+        padding: 5px;
+    }
+</style>
+<div class='row' style="max-height: 70%; ">
+    <div class='col-5'
+         ondrop="dropHandler(event)"
+         style="box-shadow: 5px 10px 18px #d7d7d7;">
+        <h5>ビデオソース</h5>
+        <video id="idvideo123" ondragstart="dragstartHandler(event)" draggable="true" width="160" height="90">
+            <source src="~/videos/cat.MP4"
+                    type="video/mp4">
+        </video>
+    </div>
+    <div class='col-7'>
+
+        <!-- 16:9 aspect ratio -->
+        <div class="embed-responsive embed-responsive-16by9" id="panel-player">
+
+            <video id="video-play-0" width="100%" height="100%" controls poster="~/videos/cat.MP4">
+                <source src="~/videos/cat.MP4"
+                        type="video/mp4">
+            </video>
+        </div>
+    </div>
+</div>
+
+<div style="height:10px"></div>
+<div style="box-shadow: 5px 10px 18px #d7d7d7;margin-left: -15px;">
+    <div class="row">
+        <div class="col-md-5">
+            <h5>ストーリーボード</h5>
+        </div>
+        <div class="col-md-4">
+        </div>
+        <div class="col-md-3">
+            <!-- Button trigger modal -->
+
+            <button id="trim-video" type="button" class="btn text-dark" data-toggle="modal" data-target="#trimModal" data-backdrop="static" data-keyboard="false">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-scissors" viewBox="0 0 16 16">
+                    <path d="M3.5 3.5c-.614-.884-.074-1.962.858-2.5L8 7.226 11.642 1c.932.538 1.472 1.616.858 2.5L8.81 8.61l1.556 2.661a2.5 2.5 0 1 1-.794.637L8 9.73l-1.572 2.177a2.5 2.5 0 1 1-.794-.637L7.19 8.61 3.5 3.5zm2.5 10a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0zm7 0a1.5 1.5 0 1 0-3 0 1.5 1.5 0 0 0 3 0z"></path>
+                </svg>
+                Trim
+            </button>
+
+            <button id="export" type="button" class="btn btn-primary">
+
+
+                Export
+            </button>
+        </div>
+    </div>
+    <form asp-action="">
+    </form>
+    <div id="root1" ondragover="dragoverHandler(event)" ondrop="dropHandler(event)">
+        <ul class="lis-group" id="lst-video">
+            <li id="first-item" class="lis-group-item draggable">
+
+                <video id="video-queue-0" width="160" height="90">
+                    <source src="~/videos/cat.MP4"
+                            type="video/mp4">
+                </video>
+            </li>
+        </ul>
+    </div>
+</div>
+<!-- Modal -->
+<div class="modal" id="trimModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-xl" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Trim video</h5>
+                <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <div class="row">
+                    <div class="col-md-10">
+                        <video id="video-edit" width="100%" height="100%" controls poster="~/videos/cat.MP4">
+                            <source src="~/videos/cat.MP4"
+                                    type="video/mp4">
+                        </video>
+                        <div id="kt_slider_basic"></div>
+
+                        <div class="row">
+                            <div class="col-md-5">Min: <span id="kt_slider_basic_min"></span><span id="kt_slider_basic_min_value" hidden></span></div>
+                            <div class="col-md-5">Max: <span id="kt_slider_basic_max"></span><span id="kt_slider_basic_max_value" hidden></span></div>
+                        </div>
+                    </div>
+                    <div class="col-md-2">
+                        <h5>クリップの長さ</h5>
+                        <h5>12:123:123</h5>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="handleSaveTrim()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+<div>
+    <a asp-action="Index">一覧に戻る</a>
+</div>
+@section Scripts {
+    @{
+        <script>
+
+        </script>
+        <script src="~/js/nouislider.js"></script>
+        <script src="~/lib/draggable/draggable.bundle.js"></script>
+        <script src="~/js/video2.js"></script>
+
+    }
+    }
+

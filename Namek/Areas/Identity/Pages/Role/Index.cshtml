@@ -1,0 +1,12 @@
+﻿@page
+@model Namek.Areas.Identity.Pages.Role.IndexModel
+
+
+<table>
+    @foreach (var role in Model.roles)
+    {
+        <tr>
+        <td>@role.Name</td>
+        </tr>
+    }
+</table>
